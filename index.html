@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Password Analyzer</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <main class="wrap">
+        <header>
+            <h1>Password Analyzer</h1>
+            <p class="muted">Strength is estimated from characters & structure.</p>
+        </header>
+
+        <section class="card">
+            <label for="pw">Password</label>
+            <div class="row">
+                <input id="pw" type="password" placeholder="Type or generate a password..."
+                    autocomplete="new-password" />
+                <button id="toggleShow" class="btn small">Show</button>
+                <button id="copyBtn" class="btn small">Copy</button>
+            </div>
+
+            <div id="meterWrap">
+                <div id="meterBar">
+                    <div id="meterFill"></div>
+                </div>
+                <div id="scoreText"></div>
+            </div>
+
+            <div id="timeEstimate" class="box small"></div>
+
+            <div id="breakdown" class="box"></div>
+
+            <details id="suggestions" class="box">
+                <summary>Suggestions</summary>
+                <ul id="suggestList"></ul>
+            </details>
+        </section>
+
+        <section class="card">
+            <h3>Generators</h3>
+            <div class="gen-row">
+                <label>Random password length:
+                    <input id="genLen" type="number" min="6" max="64" value="14" />
+                </label>
+                <button id="genPassBtn" class="btn">Generate</button>
+            </div>
+
+            <div class="gen-row">
+                <label>Passphrase words:
+                    <input id="phraseWords" type="number" min="2" max="8" value="4" />
+                </label>
+                <button id="genPhraseBtn" class="btn">Generate Passphrase</button>
+            </div>
+
+            <p class="muted small">Generated value will fill the password field so you can test it.</p>
+        </section>
+
+        <footer class="muted small">
+            <p class="muted small">Developed by Petar Georgiev as part of Erasmus+ project.</p>
+        </footer>
+    </main>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
