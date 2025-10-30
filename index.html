@@ -4,24 +4,27 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Password Analyzer</title>
+    <title>Strengthify</title>
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
     <main class="wrap">
         <header>
-            <h1>Password Analyzer</h1>
-            <p class="muted">Strength is estimated from characters & structure.</p>
+            <h1>Strengthify</h1>
+            <p class="muted">Estimate password strength, generate passwords & passphrases.</p>
+            <button id="darkModeToggle" class="btn small toggle-dark">Toggle Dark Mode</button>
         </header>
 
-        <section class="card">
-            <label for="pw">Password</label>
-            <div class="row">
+        <section class="card password-card">
+            <h2>Password Analyzer</h2>
+            <div class="row input-row">
                 <input id="pw" type="password" placeholder="Type or generate a password..."
                     autocomplete="new-password" />
-                <button id="toggleShow" class="btn small">Show</button>
-                <button id="copyBtn" class="btn small">Copy</button>
+                <div class="btn-group">
+                    <button id="toggleShow" class="btn small">Show</button>
+                    <button id="copyBtn" class="btn small">Copy</button>
+                </div>
             </div>
 
             <div id="meterWrap">
@@ -32,22 +35,28 @@
             </div>
 
             <div id="timeEstimate" class="box small"></div>
+            <div id="leakStatus" class="box small muted"></div>
 
-            <div id="breakdown" class="box"></div>
-
-            <details id="suggestions" class="box">
-                <summary>Suggestions</summary>
-                <ul id="suggestList"></ul>
-            </details>
+            <div class="details-row">
+                <details id="breakdownCard" class="box">
+                    <summary>Character Breakdown & Repeated Sequences</summary>
+                    <ul id="breakdown"></ul>
+                </details>
+                <details id="suggestions" class="box">
+                    <summary>Suggestions</summary>
+                    <ul id="suggestList"></ul>
+                </details>
+            </div>
         </section>
 
-        <section class="card">
-            <h3>Generators</h3>
+        <section class="card generator-card">
+            <h2>Password Generators</h2>
+
             <div class="gen-row">
                 <label>Random password length:
                     <input id="genLen" type="number" min="6" max="64" value="14" />
                 </label>
-                <button id="genPassBtn" class="btn">Generate</button>
+                <button id="genPassBtn" class="btn">Generate Password</button>
             </div>
 
             <div class="gen-row">
@@ -57,11 +66,11 @@
                 <button id="genPhraseBtn" class="btn">Generate Passphrase</button>
             </div>
 
-            <p class="muted small">Generated value will fill the password field so you can test it.</p>
+            <p class="muted small">Generated values will populate the password field above for testing.</p>
         </section>
 
-        <footer class="muted small">
-            <p class="muted small">Developed by Petar Georgiev as part of Erasmus+ project.</p>
+        <footer>
+            <p class="muted small">Developed by Petar Georgiev | Erasmus+ Project</p>
         </footer>
     </main>
 

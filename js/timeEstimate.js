@@ -1,4 +1,4 @@
-// js/timeEstimate.js
+//HERE IS THE LOGIC FOR ESTIMATING TIME TO CRACK A PASSWORD BASED ON ENTROPY AND OTHER FACTORS
 function humanTime(seconds) {
   if (!isFinite(seconds) || seconds <= 0) return '<1 sec';
   if (seconds < 60) return `${Math.round(seconds)} sec`;
@@ -13,7 +13,7 @@ function humanTime(seconds) {
   return '>1M years';
 }
 
-function countCharSets(s){
+function countCharSets(s) {
   return {
     lower: /[a-z]/.test(s),
     upper: /[A-Z]/.test(s),
@@ -22,45 +22,60 @@ function countCharSets(s){
   };
 }
 
-function repeatedPenalty(s){
-  if(!s) return 0;
+function repeatedPenalty(s) {
+  if (!s) return 0;
   const runs = s.match(/(.)\1{2,}/g) || [];
   return runs.length * 2;
 }
 
-function seqPenalty(s){
-  if(!s) return 0;
-  let pen = 0;
-  const lower = s.toLowerCase();
-  const nums = lower.match(/(?:012|123|234|345|456|567|678|789|987|876|765|654|543|432|321|210)/g) || [];
-  pen += nums.length * 3;
-  const alphaSeqRegex = /(?:abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz|zyx|yxw|xwv|wvu)/g;
-  const alphas = lower.match(alphaSeqRegex) || [];
-  pen += alphas.length * 3;
-  return pen;
+function seqPenalty(password) {
+  if (!password) return 0;
+  const lower = password.toLowerCase();
+  let penalty = 0;
+
+  const checkSequential = (chars) => {
+    let run = 1;
+    for (let i = 1; i < chars.length; i++) {
+      const diff = chars.charCodeAt(i) - chars.charCodeAt(i - 1);
+      if (diff === 1 || diff === -1) run++;
+      else {
+        if (run >= 3) penalty += (run - 2) * 5;
+        run = 1;
+      }
+    }
+    if (run >= 3) penalty += (run - 2) * 5;
+  };
+
+  checkSequential(lower);
+  return penalty;
 }
 
-function commonSubstringPenalty(s){
-  if(!s) return 0;
-  const commons = ['password','qwerty','1234','123','admin','letmein','qwe','asdf','zxcv','iloveyou','welcome'];
+
+function commonSubstringPenalty(s) {
+  if (!s) return 0;
+  const commons = ['password', 'qwerty', '1234', '123', 'admin', 'letmein', 'qwe', 'asdf', 'zxcv', 'iloveyou', 'welcome'];
   const lower = s.toLowerCase();
   let pen = 0;
-  for(const c of commons){
-    if(lower.includes(c)) pen += Math.max(4, Math.floor(c.length));
+  for (const c of commons) {
+    if (lower.includes(c)) pen += Math.max(4, Math.floor(c.length));
   }
   return pen;
 }
 
-export function estimateEntropyBits(password){
-  if(!password) return 0;
+export function estimateEntropyBits(password) {
+  password = password.trim();
+  if (!password) return 0;
   const sets = countCharSets(password);
   let pool = 0;
-  if(sets.lower) pool += 26;
-  if(sets.upper) pool += 26;
-  if(sets.digit) pool += 10;
-  if(sets.symbol) pool += 32;
+  if (sets.lower) pool += 26;
+  if (sets.upper) pool += 26;
+  if (sets.digit) pool += 10;
+  if (sets.symbol) pool += 32;
   pool = Math.max(pool, 1);
-  const rawBits = Math.log2(pool) * password.length;
+  let rawBits = Math.log2(pool) * password.length;
+  if (password.length >= 16) rawBits += 10;
+  if (password.length >= 20) rawBits += 15;
+  if (password.length >= 25) rawBits += 20;
   const rep = repeatedPenalty(password);
   const seq = seqPenalty(password);
   const common = commonSubstringPenalty(password);
@@ -69,8 +84,8 @@ export function estimateEntropyBits(password){
   return bits;
 }
 
-export function estimateTimeToCrack(password){
-  if(!password) return { label: 'N/A', details: null };
+export function estimateTimeToCrack(password) {
+  if (!password) return { label: 'N/A', details: null };
   const bits = estimateEntropyBits(password);
   const expectedGuesses = Math.pow(2, Math.max(0, bits - 1));
 
@@ -82,7 +97,7 @@ export function estimateTimeToCrack(password){
   };
 
   const times = {};
-  for(const label in speeds){
+  for (const label in speeds) {
     const R = speeds[label];
     const seconds = expectedGuesses / R;
     times[label] = { seconds, human: humanTime(seconds) };
