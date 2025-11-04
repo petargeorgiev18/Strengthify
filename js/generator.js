@@ -6,18 +6,40 @@ const chars = {
   symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?/~',
 };
 
-export function generatePassword(length = 14) {
-  const all = Object.values(chars).join('');
-  let pw = '';
-  for (let i = 0; i < length; i++) {
-    pw += all[Math.floor(Math.random() * all.length)];
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  return pw;
+  return array;
 }
 
-const wordList = ['apple','river','moon','sun','tree','sky','blue','green','cloud','star',
-    'mountain','ocean','forest','wind','fire','earth','light','darkness','dream','1','2','3','4','5','6','7','8','9','0', '&','!','@','#','$','%','^','*',
-    'STAR','MOON','SUN','SKY','TREE','RIVER','MOUNTAIN','OCEAN','FOREST','DREAM','FIRE','EARTH','LIGHT','DARKNESS'];
+export function generatePassword(length = 14) {
+  const pools = [chars.lowercase, chars.uppercase, chars.digits, chars.symbols];
+
+  let passwordArray = [
+    chars.lowercase[Math.floor(Math.random() * chars.lowercase.length)],
+    chars.uppercase[Math.floor(Math.random() * chars.uppercase.length)],
+    chars.digits[Math.floor(Math.random() * chars.digits.length)],
+    chars.symbols[Math.floor(Math.random() * chars.symbols.length)],
+  ];
+
+  for (let i = passwordArray.length; i < length; i++) {
+    const poolIndex = Math.floor(Math.random() * pools.length);
+    const pool = pools[poolIndex];
+    passwordArray.push(pool[Math.floor(Math.random() * pool.length)]);
+  }
+
+  return shuffle(passwordArray).join('');
+}
+
+const wordList = [
+  'apple','river','moon','sun','tree','sky','blue','green','cloud','star',
+  'mountain','ocean','forest','wind','fire','earth','light','darkness','dream',
+  'STAR','MOON','SUN','SKY','TREE','RIVER','MOUNTAIN','OCEAN','FOREST','DREAM',
+  'FIRE','EARTH','LIGHT','DARKNESS','1','2','3','4','5','6','7','8','9','0',
+  '&','!','@','#','$','%','^','*'
+];
 
 export function generatePassphrase(words = 4) {
   let passphrase = [];

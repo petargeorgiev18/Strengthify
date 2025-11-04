@@ -79,7 +79,7 @@ export function estimateEntropyBits(password) {
   const rep = repeatedPenalty(password);
   const seq = seqPenalty(password);
   const common = commonSubstringPenalty(password);
-  const totalPenaltyBits = (rep * 2) + (seq * 2) + (common * 2);
+  const totalPenaltyBits = (rep * 1) + (seq * 1) + (common * 2);
   const bits = Math.max(0, Math.round(rawBits - totalPenaltyBits));
   return bits;
 }

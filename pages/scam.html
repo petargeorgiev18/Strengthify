@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Strengthify — Scam site detector</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/scam.css" />
+</head>
+
+<body>
+  <main class="wrap">
+    <header>
+      <h1>Scam site detector</h1>
+      <p class="muted">Quick heuristic scanner to spot suspicious URLs and phishing signals.</p>
+
+      <label for="themeSelector" class="small">Theme:</label>
+      <select id="themeSelector" class="small btn">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+
+      <a href="index.html" class="btn small">Back to Strengthify</a>
+    </header>
+
+    <section class="card">
+      <h2>Analyze a URL</h2>
+      <div class="row input-row">
+        <input id="urlInput" type="url" placeholder="Paste URL (https://...)" />
+        <div class="btn-group">
+          <button id="analyzeBtn" class="btn small">Analyze</button>
+          <button id="clearBtn" class="btn small">Clear</button>
+        </div>
+      </div>
+
+      <div id="resultSummary" class="box" style="display:none;"></div>
+      <div id="flags" class="box" style="display:none;"></div>
+      <div id="advice" class="box" style="display:none;"></div>
+    </section>
+
+    <section class="card">
+      <h3>How it works</h3>
+      <p class="muted">This page runs heuristic checks and (optionally) asks Google Safe Browsing via your server proxy.
+        For definitive blocking use Safe Browsing or commercial threat feeds.</p>
+    </section>
+
+    <footer>
+      <p class="muted small">Developed by Petar Georgiev | Erasmus+ Project</p>
+    </footer>
+  </main>
+
+  <script type="module" src="../js/scam.js"></script>
+</body>
+
+</html>

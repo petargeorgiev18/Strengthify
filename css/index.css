@@ -1,0 +1,47 @@
+#pw.weak {
+    box-shadow: 0 0 20px var(--bad);
+}
+
+#pw.medium {
+    box-shadow: 0 0 20px var(--warn);
+}
+
+#pw.strong {
+    box-shadow: 0 0 20px var(--good);
+}
+
+#leakStatus.leaked {
+    border-color: var(--bad);
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--bad);
+}
+
+#scoreText {
+    font-weight: 700;
+    text-align: right;
+    color: var(--muted);
+}
+
+#meterBar {
+    height: 20px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+#meterFill {
+    height: 100%;
+    width: 0%;
+    border-radius: 25px;
+    background: linear-gradient(90deg, var(--bad), var(--warn), var(--good));
+    transition: width 0.5s ease;
+}
+
+.card.password-card:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.card.generator-card button {
+    background: linear-gradient(135deg, #00ffcc, #0077aa);
+    font-weight: 500;
+}

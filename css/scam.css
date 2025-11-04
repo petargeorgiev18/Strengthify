@@ -1,0 +1,29 @@
+#resultSummary,
+#flags,
+#advice {
+    transition: all 0.35s ease;
+    border-left: 4px solid var(--accent);
+    background: var(--glass);
+    padding: 16px;
+    border-radius: 20px;
+}
+
+#resultSummary.high {
+    border-left-color: var(--bad);
+    background: rgba(239, 68, 68, 0.08);
+}
+
+#resultSummary.medium {
+    border-left-color: var(--warn);
+    background: rgba(245, 158, 11, 0.08);
+}
+
+#resultSummary.low {
+    border-left-color: var(--good);
+    background: rgba(16, 163, 74, 0.08);
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 50px var(--shadow);
+}

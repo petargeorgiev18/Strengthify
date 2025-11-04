@@ -1,0 +1,27 @@
+{
+  "name": "strengthify",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "node-fetch": "^2.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petargeorgiev18/Strengthify.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/petargeorgiev18/Strengthify/issues"
+  },
+  "homepage": "https://github.com/petargeorgiev18/Strengthify#readme"
+}
