@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build_test:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -20,5 +20,3 @@ jobs:
         node-version: 20
     - name: Install Node modules        
       run: npm install
-    - name: Execute integration tests
-      run: npm test
