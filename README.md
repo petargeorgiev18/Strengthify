@@ -1,16 +1,17 @@
 🚀 How to Run the Project
+1. Open the project in Visual Studio Code.
+2. Start the frontend
 
-Open the project in Visual Studio Code.
+Right-click index.html → “Open with Live Server.”
 
-Start the frontend:
+3. Install backend dependencies
 
-Right-click on the index.html file and select “Open with Live Server.”
+Open a terminal in VS Code (preferably Command Prompt) and run:
 
-Start the backend:
+npm install
 
-Open a terminal in VS Code and run:
-
+4. Start the backend
 node server.js
 
 
-Once both are running, you can use the Scam Site Checker and the whole project in your browser!
+Once both are running, the whole Scam Checker app is ready to use in your browser!
