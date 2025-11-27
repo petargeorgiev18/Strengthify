@@ -10,7 +10,7 @@ Open a terminal in VS Code (preferably Command Prompt) and run:
 
 npm install
 
-4. Start the backend
+4. Start the backend:
 node server.js
 
 
